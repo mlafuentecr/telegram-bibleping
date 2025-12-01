@@ -1,18 +1,13 @@
 // backend/src/services/imageService.js
 
-// Usamos LoremFlickr: fotos reales por tema, sin API key
-// Ejemplo: https://loremflickr.com/1200/800/nature
-
-const THEMES = ['nature', 'landscape', 'forest', 'mountains', 'river', 'sky', 'sunrise', 'sunset'];
+const THEMES = ['sunrise', 'nature', 'landscape', 'mountains', 'river', 'forest'];
 
 const getRandomImageUrl = () => {
-  const width = 1200;
-  const height = 800;
+  const theme = THEMES[Math.floor(Math.random() * THEMES.length)];
+  const ts = Date.now();  
 
-  const index = Math.floor(Math.random() * THEMES.length);
-  const theme = THEMES[index];
-
-  return `https://loremflickr.com/${width}/${height}/${encodeURIComponent(theme)}`;
+  // loremflickr devuelve imagen random y el ts evita caché del navegador
+  return `https://loremflickr.com/1200/800/${encodeURIComponent(theme)}?t=${ts}`;
 };
 
 module.exports = { getRandomImageUrl };

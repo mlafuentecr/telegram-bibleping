@@ -1,0 +1,18 @@
+.screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.screen__inner {
+  width: 100%;
+  max-width: 420px;
+}
+
+.screen__loader {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #64748b;
+}

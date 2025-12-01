@@ -3,7 +3,12 @@ const { getDailyVerse, getRandomVerse } = require('./services/verseService');
 const { getRandomImageUrl } = require('./services/imageService'); // 👈 nuevo
 
 const buildResponse = (res, status, payload) => {
-  res.writeHead(status, { 'Content-Type': 'application/json' });
+  res.writeHead(status, {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',           
+    'Access-Control-Allow-Methods': 'GET,OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  });
   res.end(JSON.stringify(payload));
 };
 
