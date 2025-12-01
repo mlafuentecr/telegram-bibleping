@@ -1,11 +1,12 @@
-// frontend/src/app/api/verse/route.ts
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
-// GET /api/verse
-export async function GET(_request: Request) {
-  // De momento algo simple; luego podemos conectarlo al bot o a una API
-  return NextResponse.json({
-    message: 'BiblePing verse API',
-    example: 'John 3:16',
-  });
+export async function GET(req: Request) {
+  // Ejemplo simple: luego aquí metemos traducciones, idioma, etc.
+  const verse = {
+    reference: "John 3:16",
+    text: "For God so loved the world...",
+    lang: "en",
+  };
+
+  return NextResponse.json(verse);
 }

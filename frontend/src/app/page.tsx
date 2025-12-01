@@ -19,8 +19,8 @@ export default function HomePage() {
       setLoading(true);
 
       const [verseRes, imageRes] = await Promise.all([
-        fetch('http://localhost:3001/api/verse/daily?language=es'),
-        fetch('http://localhost:3001/api/image/random'),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/verse/daily?language=es`),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/image/random`),
       ]);
 
       const verseJson = await verseRes.json();
@@ -40,7 +40,7 @@ export default function HomePage() {
     try {
       console.log('Change background clicked');
 
-      const res = await fetch('http://localhost:3001/api/image/random', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/image/random`, {
         cache: 'no-store',
       });
 

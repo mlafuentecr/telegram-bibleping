@@ -1,7 +1,7 @@
 // src/app/api/image/route.ts
 import { NextResponse } from 'next/server';
 
-const BACKEND_URL = 'http://localhost:3001/api/image/random';
+const BACKEND_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/image/random`;
 
 export async function GET() {
   try {
