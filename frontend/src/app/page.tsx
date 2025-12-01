@@ -19,8 +19,8 @@ export default function HomePage() {
       setLoading(true);
 
       const [verseRes, imageRes] = await Promise.all([
-        fetch(`/api/verse/daily?language=es`),
-        fetch(`/api/image/random`),
+        fetch(`/api/verse?language=en`),
+        fetch(`/api/image`),
       ]);
 
       const verseJson = await verseRes.json();
@@ -36,30 +36,29 @@ export default function HomePage() {
     }
   };
 
-  const changeBackground = async () => {
-    try {
-      console.log('Change background clicked');
+const changeBackground = async () => {
+  try {
+    console.log('Change background clicked');
 
-      const res = await fetch(`/api/image/random`, {
-        cache: 'no-store',
-      });
+    const res = await fetch('/api/image', {
+      cache: 'no-store',
+    });
 
-      if (!res.ok) {
-        console.error('Error HTTP cambiando background:', res.status);
-        setBackgroundUrl('/default-bg.jpg');
-        return;
-      }
-
-      const data = await res.json();
-      console.log('Nueva imagen:', data);
-
-      setBackgroundUrl(data.imageUrl ?? '/default-bg.jpg');
-    } catch (err) {
-      console.error('Error changing background:', err);
+    if (!res.ok) {
+      console.error('Error HTTP cambiando background:', res.status);
       setBackgroundUrl('/default-bg.jpg');
+      return;
     }
-     window.location.reload();
-  };
+
+    const data = await res.json();
+    console.log('Nueva imagen:', data);
+
+    setBackgroundUrl(data.imageUrl ?? '/default-bg.jpg');
+  } catch (err) {
+    console.error('Error changing background:', err);
+    setBackgroundUrl('/default-bg.jpg');
+  }
+};
 
   useEffect(() => {
     fetchData();
