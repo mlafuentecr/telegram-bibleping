@@ -1,14 +1,11 @@
+// backend/src/index.js
 const http = require('http');
-const app = require('./app');
-const config = require('./config');
-const startBot = require('./bot');
+const handleRequest = require('./app');
 
-const bot = startBot();
-const server = http.createServer(app);
+const PORT = process.env.PORT || 3001;
 
-server.listen(config.port, () => {
-  console.log(`API BiblePing escuchando en el puerto ${config.port}`);
-  if (!bot) {
-    console.log('El bot no se inició. Verifica BOT_TOKEN.');
-  }
+const server = http.createServer(handleRequest);
+
+server.listen(PORT, () => {
+  console.log(`BiblePing API running at http://localhost:${PORT}`);
 });
