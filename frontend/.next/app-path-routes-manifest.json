@@ -1,0 +1,9 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/image/route": "/api/image",
+  "/api/verse/route": "/api/verse",
+  "/page": "/",
+  "/play/page": "/play",
+  "/settings/page": "/settings"
+}
