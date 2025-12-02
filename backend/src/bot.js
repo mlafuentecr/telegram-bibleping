@@ -27,6 +27,29 @@ bot.command("start", async (ctx) => {
     "👋 Welcome to BiblePing!\nUse /verse to get a Bible verse.\nUse /app to open the Mini App."
   );
 });
+// --- INLINE MODE ---
+bot.on('inline_query', async (query) => {
+    console.log("[inline] Query received:", query.query);
+
+    const search = query.query.trim();
+    if (!search) {
+        return bot.answerInlineQuery(query.id, [], { cache_time: 0 });
+    }
+
+    // === Resultado de ejemplo (luego lo conectamos a tu API bíblica) ===
+    const results = [{
+        type: 'article',
+        id: '1',
+        title: `Verse result for: ${search}`,
+        description: 'Example verse (replace with real API response)',
+        input_message_content: {
+            message_text: `John 3:16 - For God so loved the world...`
+        }
+    }];
+
+    await bot.answerInlineQuery(query.id, results, { cache_time: 0 });
+});
+
 
 // /verse
 bot.command("verse", async (ctx) => {
