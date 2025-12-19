@@ -1,43 +1,44 @@
-// src/components/VerseCard.tsx
-'use client';
-
-import React from 'react';
-import BackgroundSwitcher from './BackgroundSwitcher';
 import ShareButton from './ShareButton';
 
 type VerseCardProps = {
-  backgroundUrl: string;
   reference: string;
   text: string;
-  onChangeBackground?: () => void;
+  backgroundUrl: string;
+  onChangeBackground: () => void;
+  onChangeVerse?: () => void;
 };
 
-const VerseCard: React.FC<VerseCardProps> = ({
-  backgroundUrl,
+export default function VerseCard({
   reference,
   text,
+  backgroundUrl,
   onChangeBackground,
-}) => {
+  onChangeVerse,
+}: VerseCardProps) {
   return (
-    <section className="verse-card">
-      <div
-        className="verse-card__bg"
-        style={{ backgroundImage: `url(${backgroundUrl})` }}
-      />
-      <div className="verse-card__overlay" />
-
+    <section
+      className="verse-card"
+      style={{ backgroundImage: `url(${backgroundUrl})` }}
+    >
       <div className="verse-card__content">
-        <p className="verse-card__label">Today&apos;s Verse</p>
-        <h1 className="verse-card__reference">{reference}</h1>
-        <p className="verse-card__text">{text}</p>
+        <h2>{reference}</h2>
+        <p>{text}</p>
 
         <div className="verse-card__actions">
-          <BackgroundSwitcher onClick={onChangeBackground} />
-          <ShareButton reference={reference} text={text} />
+          <button onClick={onChangeBackground}>Change background</button>
+
+          {onChangeVerse && (
+            <button onClick={onChangeVerse}>New verse</button>
+          )}
+
+          {/* 🔥 FIX AQUÍ */}
+          <ShareButton
+            reference={reference}
+            text={text}
+            imageUrl={backgroundUrl}
+          />
         </div>
       </div>
     </section>
   );
-};
-
-export default VerseCard;
+}
