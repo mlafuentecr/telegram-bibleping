@@ -42,31 +42,42 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var _s = __turbopack_context__.k.signature();
 'use client';
 ;
-function ShareButton({ reference, text }) {
+function ShareButton({ reference, text, imageUrl }) {
     _s();
     const [copied, setCopied] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const shareText = `📖 ${reference}\n\n${text}\n\n🙏 via BiblePing`;
     const handleShare = async ()=>{
-        // 1️⃣ Native share (mobile first)
-        if (navigator.share) {
+        // 🔹 Try native share WITH image (Level 2)
+        if (navigator.canShare && navigator.canShare({
+            files: []
+        })) {
             try {
+                const response = await fetch(imageUrl);
+                const blob = await response.blob();
+                const file = new File([
+                    blob
+                ], 'bibleping-verse.png', {
+                    type: blob.type
+                });
                 await navigator.share({
                     title: reference,
                     text: shareText,
-                    url: window.location.href
+                    files: [
+                        file
+                    ]
                 });
                 return;
-            } catch  {
-            // user cancelled → silently ignore
+            } catch (err) {
+                console.warn('Image share failed, falling back:', err);
             }
         }
-        // 2️⃣ Fallback: copy to clipboard
+        // 🔹 Fallback: copy text + link
         try {
-            await navigator.clipboard.writeText(`${shareText}\n${window.location.href}`);
+            await navigator.clipboard.writeText(`${shareText}\n\n${window.location.href}`);
             setCopied(true);
             setTimeout(()=>setCopied(false), 2000);
         } catch (err) {
-            console.error('Share failed:', err);
+            console.error('Clipboard fallback failed:', err);
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -77,7 +88,7 @@ function ShareButton({ reference, text }) {
         children: copied ? 'Copied ✓' : 'Share'
     }, void 0, false, {
         fileName: "[project]/frontend/src/components/ShareButton.tsx",
-        lineNumber: 43,
+        lineNumber: 56,
         columnNumber: 5
     }, this);
 }

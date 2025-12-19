@@ -5,37 +5,50 @@ import { useState } from 'react';
 type ShareButtonProps = {
   reference: string;
   text: string;
+  imageUrl: string;
 };
 
-export default function ShareButton({ reference, text }: ShareButtonProps) {
+export default function ShareButton({
+  reference,
+  text,
+  imageUrl,
+}: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const shareText = `📖 ${reference}\n\n${text}\n\n🙏 via BiblePing`;
 
   const handleShare = async () => {
-    // 1️⃣ Native share (mobile first)
-    if (navigator.share) {
+    // 🔹 Try native share WITH image (Level 2)
+    if (navigator.canShare && navigator.canShare({ files: [] })) {
       try {
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+
+        const file = new File([blob], 'bibleping-verse.png', {
+          type: blob.type,
+        });
+
         await navigator.share({
           title: reference,
           text: shareText,
-          url: window.location.href,
+          files: [file],
         });
+
         return;
-      } catch {
-        // user cancelled → silently ignore
+      } catch (err) {
+        console.warn('Image share failed, falling back:', err);
       }
     }
 
-    // 2️⃣ Fallback: copy to clipboard
+    // 🔹 Fallback: copy text + link
     try {
       await navigator.clipboard.writeText(
-        `${shareText}\n${window.location.href}`
+        `${shareText}\n\n${window.location.href}`
       );
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Share failed:', err);
+      console.error('Clipboard fallback failed:', err);
     }
   };
 
