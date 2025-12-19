@@ -40,7 +40,7 @@ const upsertUser = (chatId, data = {}) => {
 
   const base = {
     chatId,
-    language: defaultLanguage,   // 👈 idioma por defecto
+    language: defaultLanguage,   
     subscribed: true,
     sendHour: dailyPushHour,
     lastSentDate: null,

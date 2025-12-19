@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import VerseCard from '../components/VerseCard';
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE!;
 
 type Verse = {
   reference: string;
@@ -14,33 +15,57 @@ export default function HomePage() {
   const [backgroundUrl, setBackgroundUrl] = useState<string>('/default-bg.jpg');
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
-    try {
-      setLoading(true);
+const fetchData = async () => {
+  try {
+    setLoading(true);
 
-      const [verseRes, imageRes] = await Promise.all([
-        fetch(`/api/verse?language=en`),
-        fetch(`/api/image`),
-      ]);
+    const [verseRes, imageRes] = await Promise.all([
+      fetch(`${API_BASE}/api/verse/daily?language=en`, { cache: 'no-store' }),
+      fetch(`${API_BASE}/api/image`, { cache: 'no-store' }),
+    ]);
 
-      const verseJson = await verseRes.json();
-      const imageJson = await imageRes.json();
+    const verseJson = await verseRes.json();
+    const imageJson = await imageRes.json();
 
-      setVerse(verseJson.verse);
-      setBackgroundUrl(imageJson.imageUrl ?? '/default-bg.jpg');
-    } catch (err) {
-      console.error('Error fetching data:', err);
-      setBackgroundUrl('/default-bg.jpg');
-    } finally {
-      setLoading(false);
+    setVerse(verseJson.verse ?? verseJson);
+    setBackgroundUrl(imageJson.imageUrl ?? '/default-bg.jpg');
+  } catch (err) {
+    console.error('Error fetching data:', err);
+    setBackgroundUrl('/default-bg.jpg');
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+const changeVerse = async () => {
+  try {
+    setLoading(true);
+
+    const res = await fetch(`${API_BASE}/api/verse/random?language=en`, {
+      cache: 'no-store',
+    });
+
+    if (!res.ok) {
+      console.error('Error fetching random verse:', res.status);
+      return;
     }
-  };
+
+    const data = await res.json();
+    setVerse(data.verse ?? data);
+  } catch (err) {
+    console.error('Error changing verse:', err);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
 const changeBackground = async () => {
   try {
     console.log('Change background clicked');
 
-    const res = await fetch('/api/image', {
+    const res = await fetch(`${API_BASE}/api/image`, {
       cache: 'no-store',
     });
 
