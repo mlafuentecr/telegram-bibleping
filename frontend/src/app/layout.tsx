@@ -1,7 +1,7 @@
 // src/app/layout.tsx
 import type { Metadata } from 'next';
 import React from 'react';
-import '../app/globals.scss';
+import './globals.scss';
 
 export const metadata: Metadata = {
   title: 'BiblePing',

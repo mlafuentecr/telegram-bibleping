@@ -32,46 +32,56 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 "[project]/frontend/src/components/ShareButton.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-// src/components/ShareButton.tsx
 __turbopack_context__.s([
     "default",
     ()=>ShareButton
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 function ShareButton({ reference, text }) {
+    _s();
+    const [copied, setCopied] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const shareText = `📖 ${reference}\n\n${text}\n\n🙏 via BiblePing`;
     const handleShare = async ()=>{
-        const shareText = `${reference}\n\n${text}`;
+        // 1️⃣ Native share (mobile first)
         if (navigator.share) {
             try {
                 await navigator.share({
                     title: reference,
-                    text: shareText
+                    text: shareText,
+                    url: window.location.href
                 });
+                return;
             } catch  {
-            // usuario canceló
+            // user cancelled → silently ignore
             }
-        } else {
-            try {
-                await navigator.clipboard.writeText(shareText);
-                alert('Versículo copiado al portapapeles');
-            } catch (err) {
-                console.error('Error copying to clipboard:', err);
-            }
+        }
+        // 2️⃣ Fallback: copy to clipboard
+        try {
+            await navigator.clipboard.writeText(`${shareText}\n${window.location.href}`);
+            setCopied(true);
+            setTimeout(()=>setCopied(false), 2000);
+        } catch (err) {
+            console.error('Share failed:', err);
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-        className: "btn btn--primary",
         type: "button",
         onClick: handleShare,
-        children: "Share"
+        className: "btn btn--primary",
+        "aria-label": "Share verse",
+        children: copied ? 'Copied ✓' : 'Share'
     }, void 0, false, {
         fileName: "[project]/frontend/src/components/ShareButton.tsx",
-        lineNumber: 33,
+        lineNumber: 43,
         columnNumber: 5
     }, this);
 }
+_s(ShareButton, "NE86rL3vg4NVcTTWDavsT0hUBJs=");
 _c = ShareButton;
 var _c;
 __turbopack_context__.k.register(_c, "ShareButton");
