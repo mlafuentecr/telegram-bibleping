@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":["file:///Applications/XAMPP/xamppfiles/htdocs/telegram-bibleping/frontend/src/app/api/image/route.ts"],"sourcesContent":["import { NextResponse } from 'next/server';\n\nexport async function GET() {\n  try {\n    // Imagen aleatoria desde Picsum\n    const imageUrl = `https://picsum.photos/600/800?random=${Date.now()}`;\n\n    return NextResponse.json(\n      { imageUrl },\n      { status: 200 }\n    );\n  } catch (err) {\n    console.error('Error in /api/image:', err);\n\n    return NextResponse.json(\n      { imageUrl: '/default-bg.jpg' },\n      { status: 200 }\n    );\n  }\n}\n"],"names":[],"mappings":";;;;AAAA;;AAEO,eAAe;IACpB,IAAI;QACF,gCAAgC;QAChC,MAAM,WAAW,CAAC,qCAAqC,EAAE,KAAK,GAAG,IAAI;QAErE,OAAO,gJAAY,CAAC,IAAI,CACtB;YAAE;QAAS,GACX;YAAE,QAAQ;QAAI;IAElB,EAAE,OAAO,KAAK;QACZ,QAAQ,KAAK,CAAC,wBAAwB;QAEtC,OAAO,gJAAY,CAAC,IAAI,CACtB;YAAE,UAAU;QAAkB,GAC9B;YAAE,QAAQ;QAAI;IAElB;AACF"}}]
-}

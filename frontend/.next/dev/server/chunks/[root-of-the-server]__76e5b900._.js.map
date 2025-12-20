@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":["file:///Applications/XAMPP/xamppfiles/htdocs/telegram-bibleping/frontend/src/app/api/verse/route.ts"],"sourcesContent":["import { NextResponse } from 'next/server';\n\nexport async function GET(req: Request) {\n  const url = new URL(req.url);\n  const lang = url.searchParams.get('language') ?? 'en';\n\n  const verse =\n    lang === 'es'\n      ? {\n          reference: 'Juan 3:16',\n          text: 'Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito…',\n        }\n      : {\n          reference: 'John 3:16',\n          text: 'For God so loved the world that he gave his one and only Son…',\n        };\n\n  return NextResponse.json({ verse }, { status: 200 });\n}\n"],"names":[],"mappings":";;;;AAAA;;AAEO,eAAe,IAAI,GAAY;IACpC,MAAM,MAAM,IAAI,IAAI,IAAI,GAAG;IAC3B,MAAM,OAAO,IAAI,YAAY,CAAC,GAAG,CAAC,eAAe;IAEjD,MAAM,QACJ,SAAS,OACL;QACE,WAAW;QACX,MAAM;IACR,IACA;QACE,WAAW;QACX,MAAM;IACR;IAEN,OAAO,gJAAY,CAAC,IAAI,CAAC;QAAE;IAAM,GAAG;QAAE,QAAQ;IAAI;AACpD"}}]
-}

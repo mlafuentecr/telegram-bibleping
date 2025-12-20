@@ -3,8 +3,6 @@
 import { useEffect, useState } from 'react';
 import VerseCard from '../components/VerseCard';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE || '';
-
 type Verse = {
   reference: string;
   text: string;
@@ -12,19 +10,17 @@ type Verse = {
 
 export default function HomePage() {
   const [verse, setVerse] = useState<Verse | null>(null);
-  const [backgroundUrl, setBackgroundUrl] = useState<string>('/default-bg.jpg');
+  const [backgroundUrl, setBackgroundUrl] = useState('/default-bg.jpg');
   const [loading, setLoading] = useState(true);
 
-  /**
-   * Fetch DAILY verse + background on first load
-   */
+  // Fetch DAILY verse + background on first load
   const fetchData = async () => {
     try {
       setLoading(true);
 
       const [verseRes, imageRes] = await Promise.all([
-        fetch(`${API_BASE}/api/verse/daily?language=en`, { cache: 'no-store' }),
-        fetch(`${API_BASE}/api/image`, { cache: 'no-store' }),
+        fetch('/api/verse/daily?language=en', { cache: 'no-store' }),
+        fetch('/api/image', { cache: 'no-store' }),
       ]);
 
       const verseJson = await verseRes.json();
@@ -40,17 +36,14 @@ export default function HomePage() {
     }
   };
 
-  /**
-   * Fetch RANDOM verse
-   */
+  // Fetch RANDOM verse
   const changeVerse = async () => {
     try {
       setLoading(true);
 
-      const res = await fetch(
-        `${API_BASE}/api/verse/random?language=en`,
-        { cache: 'no-store' }
-      );
+      const res = await fetch('/api/verse/random?language=en', {
+        cache: 'no-store',
+      });
 
       if (!res.ok) {
         console.error('Error fetching random verse:', res.status);
@@ -66,12 +59,10 @@ export default function HomePage() {
     }
   };
 
-  /**
-   * Change ONLY the background image
-   */
+  // Change ONLY the background image
   const changeBackground = async () => {
     try {
-      const res = await fetch(`/api/image`, { cache: 'no-store' });
+      const res = await fetch('/api/image', { cache: 'no-store' });
 
       if (!res.ok) {
         console.error('Error fetching background image:', res.status);
