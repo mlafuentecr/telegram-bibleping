@@ -64,7 +64,7 @@ bot.command("start", async (ctx) => {
 bot.command("verse", async (ctx) => {
   try {
     const response = await fetch(
-      "https://bibleping.netlify.app/api/verse?language=en"
+      "https://bibleping.netlify.app/api/verse/random?language=en"
     );
 
     const data = await response.json();
