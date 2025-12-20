@@ -1,0 +1,7 @@
+[00:00:00.675] Server  LOG     ✓ Ready in 479ms
+[00:00:02.836] Browser ERROR   Error fetching data: {}
+[00:01:18.524] Browser ERROR   Error fetching data: {}
+[00:02:07.363] Browser ERROR   Error fetching data: {}
+[00:04:10.289] Server  LOG     ✓ Compiled in 101ms
+[00:04:18.787] Server  LOG     ✓ Compiled in 73ms
+[00:04:30.502] Server  LOG     ✓ Compiled in 20ms

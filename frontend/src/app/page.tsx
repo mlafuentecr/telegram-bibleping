@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import VerseCard from '../components/VerseCard';
+const API_BASE =
+  process.env.NEXT_PUBLIC_API_BASE ||
+  '';
 
 type Verse = {
   reference: string;
@@ -19,7 +22,7 @@ export default function HomePage() {
       setLoading(true);
 
       const [verseRes, imageRes] = await Promise.all([
-        fetch('/api/verse/daily?language=en', { cache: 'no-store' }),
+        fetch(`${API_BASE}/api/verse/daily?language=en`, { cache: 'no-store' }),
         fetch('/api/image', { cache: 'no-store' }),
       ]);
 
@@ -41,7 +44,7 @@ export default function HomePage() {
     try {
       setLoading(true);
 
-      const res = await fetch('/api/verse/random?language=en', {
+      const res = await fetch(`${API_BASE}/api/verse/random?language=en`, {
         cache: 'no-store',
       });
 
