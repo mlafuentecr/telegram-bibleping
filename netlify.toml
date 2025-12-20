@@ -5,27 +5,3 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-
-[functions]
-  directory = "netlify/functions"
-
-[[redirects]]
-  from = "/api/verse/daily"
-  to = "/.netlify/functions/verse-daily"
-  status = 200
-
-[[redirects]]
-  from = "/api/verse/random"
-  to = "/.netlify/functions/verse-random"
-  status = 200
-
-[[redirects]]
-  from = "/api/image"
-  to = "/.netlify/functions/image-random"
-  status = 200
-
-
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/___netlify-server-handler"
-  status = 200

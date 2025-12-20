@@ -171,7 +171,6 @@ __turbopack_context__.s([
     "default",
     ()=>HomePage
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$VerseCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/VerseCard.tsx [app-client] (ecmascript)");
@@ -180,18 +179,16 @@ var _s = __turbopack_context__.k.signature();
 'use client';
 ;
 ;
-const API_BASE = ("TURBOPACK compile-time value", "http://localhost:3001") || '';
 function HomePage() {
     _s();
     const [verse, setVerse] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [backgroundUrl, setBackgroundUrl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('/default-bg.jpg');
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
-    // Fetch DAILY verse + background on first load
     const fetchData = async ()=>{
         try {
             setLoading(true);
             const [verseRes, imageRes] = await Promise.all([
-                fetch(`${API_BASE}/api/verse/daily?language=en`, {
+                fetch('/api/verse/daily?language=en', {
                     cache: 'no-store'
                 }),
                 fetch('/api/image', {
@@ -209,17 +206,12 @@ function HomePage() {
             setLoading(false);
         }
     };
-    // Fetch RANDOM verse
     const changeVerse = async ()=>{
         try {
             setLoading(true);
-            const res = await fetch(`${API_BASE}/api/verse/random?language=en`, {
+            const res = await fetch('/api/verse/random?language=en', {
                 cache: 'no-store'
             });
-            if (!res.ok) {
-                console.error('Error fetching random verse:', res.status);
-                return;
-            }
             const data = await res.json();
             setVerse(data.verse ?? data);
         } catch (err) {
@@ -228,17 +220,11 @@ function HomePage() {
             setLoading(false);
         }
     };
-    // Change ONLY the background image
     const changeBackground = async ()=>{
         try {
             const res = await fetch('/api/image', {
                 cache: 'no-store'
             });
-            if (!res.ok) {
-                console.error('Error fetching background image:', res.status);
-                setBackgroundUrl('/default-bg.jpg');
-                return;
-            }
             const data = await res.json();
             setBackgroundUrl(data.imageUrl ?? '/default-bg.jpg');
         } catch (err) {
@@ -260,7 +246,7 @@ function HomePage() {
                 children: "Loading verse…"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 92,
+                lineNumber: 74,
                 columnNumber: 11
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$VerseCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                 backgroundUrl: backgroundUrl,
@@ -270,17 +256,17 @@ function HomePage() {
                 onChangeVerse: changeVerse
             }, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 94,
+                lineNumber: 76,
                 columnNumber: 11
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/app/page.tsx",
-            lineNumber: 90,
+            lineNumber: 72,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/page.tsx",
-        lineNumber: 89,
+        lineNumber: 71,
         columnNumber: 5
     }, this);
 }
