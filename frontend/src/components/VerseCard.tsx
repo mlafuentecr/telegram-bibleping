@@ -1,3 +1,5 @@
+'use client';
+
 import ShareButton from './ShareButton';
 
 type VerseCardProps = {
@@ -21,17 +23,29 @@ export default function VerseCard({
       style={{ backgroundImage: `url(${backgroundUrl})` }}
     >
       <div className="verse-card__content">
-        <h2>{reference}</h2>
-        <p>{text}</p>
+        <h2 className="verse-card__reference">{reference}</h2>
+        <p className="verse-card__text">{text}</p>
 
         <div className="verse-card__actions">
-          <button onClick={onChangeBackground}>Change background</button>
+          <button
+            type="button"
+            onClick={onChangeBackground}
+            aria-label="Change background image"
+          >
+            Change background
+          </button>
 
           {onChangeVerse && (
-            <button onClick={onChangeVerse}>New verse</button>
+            <button
+              type="button"
+              onClick={onChangeVerse}
+              aria-label="Get a new verse"
+            >
+              New verse
+            </button>
           )}
 
-          {/* 🔥 FIX AQUÍ */}
+          {/* Share verse with attached image when supported */}
           <ShareButton
             reference={reference}
             text={text}

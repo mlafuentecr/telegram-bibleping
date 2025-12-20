@@ -208,6 +208,29 @@ The frontend fetches data from the backend API running on **port 3001**.
 
 MIT License
 
+telegram-bibleping/
+│
+├─ frontend/                ← Next.js (Netlify build)
+│   ├─ package.json
+│   ├─ next.config.js
+│   └─ src/
+│
+├─ backend/                 ← lógica compartida (services, data)
+│   └─ src/
+│      ├─ services/
+│      ├─ data/
+│      └─ utils/
+│
+├─ netlify/
+│   └─ functions/           ← 👈 ACÁ VAN LAS FUNCTIONS
+│      ├─ verse-daily.js
+│      ├─ verse-random.js
+│      └─ image-random.js
+│
+├─ netlify.toml
+├─ package.json (opcional)
+└─ README.md
+
 ---
 
 🙏 *BiblePing — Daily inspiration in one message.*
