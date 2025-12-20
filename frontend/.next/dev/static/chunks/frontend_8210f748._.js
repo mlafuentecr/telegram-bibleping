@@ -79,6 +79,7 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$ShareButton$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/components/ShareButton.tsx [app-client] (ecmascript)");
+'use client';
 ;
 ;
 function VerseCard({ reference, text, backgroundUrl, onChangeBackground, onChangeVerse }) {
@@ -91,36 +92,42 @@ function VerseCard({ reference, text, backgroundUrl, onChangeBackground, onChang
             className: "verse-card__content",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                    className: "verse-card__reference",
                     children: reference
                 }, void 0, false, {
                     fileName: "[project]/frontend/src/components/VerseCard.tsx",
-                    lineNumber: 24,
+                    lineNumber: 26,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                    className: "verse-card__text",
                     children: text
                 }, void 0, false, {
                     fileName: "[project]/frontend/src/components/VerseCard.tsx",
-                    lineNumber: 25,
+                    lineNumber: 27,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "verse-card__actions",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                            type: "button",
                             onClick: onChangeBackground,
+                            "aria-label": "Change background image",
                             children: "Change background"
                         }, void 0, false, {
                             fileName: "[project]/frontend/src/components/VerseCard.tsx",
-                            lineNumber: 28,
+                            lineNumber: 30,
                             columnNumber: 11
                         }, this),
                         onChangeVerse && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                            type: "button",
                             onClick: onChangeVerse,
+                            "aria-label": "Get a new verse",
                             children: "New verse"
                         }, void 0, false, {
                             fileName: "[project]/frontend/src/components/VerseCard.tsx",
-                            lineNumber: 31,
+                            lineNumber: 39,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$ShareButton$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -129,24 +136,24 @@ function VerseCard({ reference, text, backgroundUrl, onChangeBackground, onChang
                             imageUrl: backgroundUrl
                         }, void 0, false, {
                             fileName: "[project]/frontend/src/components/VerseCard.tsx",
-                            lineNumber: 35,
+                            lineNumber: 49,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/frontend/src/components/VerseCard.tsx",
-                    lineNumber: 27,
+                    lineNumber: 29,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/frontend/src/components/VerseCard.tsx",
-            lineNumber: 23,
+            lineNumber: 25,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/frontend/src/components/VerseCard.tsx",
-        lineNumber: 19,
+        lineNumber: 21,
         columnNumber: 5
     }, this);
 }
@@ -170,17 +177,18 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$VerseCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/src/components/VerseCard.tsx [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
-// src/app/page.tsx
 'use client';
 ;
 ;
-const API_BASE = ("TURBOPACK compile-time value", "https://bibleping-api.up.railway.app");
+const API_BASE = ("TURBOPACK compile-time value", "http://localhost:3001") || '';
 function HomePage() {
     _s();
     const [verse, setVerse] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [backgroundUrl, setBackgroundUrl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('/default-bg.jpg');
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
-    const fetchData = async ()=>{
+    /**
+   * Fetch DAILY verse + background on first load
+   */ const fetchData = async ()=>{
         try {
             setLoading(true);
             const [verseRes, imageRes] = await Promise.all([
@@ -202,7 +210,9 @@ function HomePage() {
             setLoading(false);
         }
     };
-    const changeVerse = async ()=>{
+    /**
+   * Fetch RANDOM verse
+   */ const changeVerse = async ()=>{
         try {
             setLoading(true);
             const res = await fetch(`${API_BASE}/api/verse/random?language=en`, {
@@ -220,19 +230,19 @@ function HomePage() {
             setLoading(false);
         }
     };
-    const changeBackground = async ()=>{
+    /**
+   * Change ONLY the background image
+   */ const changeBackground = async ()=>{
         try {
-            console.log('Change background clicked');
-            const res = await fetch(`${API_BASE}/api/image`, {
+            const res = await fetch(`/api/image`, {
                 cache: 'no-store'
             });
             if (!res.ok) {
-                console.error('Error HTTP cambiando background:', res.status);
+                console.error('Error fetching background image:', res.status);
                 setBackgroundUrl('/default-bg.jpg');
                 return;
             }
             const data = await res.json();
-            console.log('Nueva imagen:', data);
             setBackgroundUrl(data.imageUrl ?? '/default-bg.jpg');
         } catch (err) {
             console.error('Error changing background:', err);
@@ -253,26 +263,27 @@ function HomePage() {
                 children: "Loading verse…"
             }, void 0, false, {
                 fileName: "[project]/frontend/src/app/page.tsx",
-                lineNumber: 96,
+                lineNumber: 98,
                 columnNumber: 11
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$src$2f$components$2f$VerseCard$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                 backgroundUrl: backgroundUrl,
                 reference: verse.reference,
                 text: verse.text,
-                onChangeBackground: changeBackground
+                onChangeBackground: changeBackground,
+                onChangeVerse: changeVerse
             }, void 0, false, {
                 fileName: "[project]/frontend/src/app/page.tsx",
-                lineNumber: 98,
+                lineNumber: 100,
                 columnNumber: 11
             }, this)
         }, void 0, false, {
             fileName: "[project]/frontend/src/app/page.tsx",
-            lineNumber: 94,
+            lineNumber: 96,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/frontend/src/app/page.tsx",
-        lineNumber: 93,
+        lineNumber: 95,
         columnNumber: 5
     }, this);
 }
