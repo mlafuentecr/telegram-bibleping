@@ -1,5 +1,8 @@
-[00:00:00.581] Server  LOG      ✓ Ready in 380ms
-[00:10:20.970] Server  LOG      ✓ Compiled in 22ms
-[00:11:21.278] Server  LOG      ✓ Compiled in 152ms
-[00:14:04.930] Server  LOG      ✓ Compiled in 111ms
-[00:16:29.145] Server  LOG      ✓ Compiled in 118ms
+[00:00:00.689] Server  LOG     ✓ Ready in 482ms
+[00:00:04.088] Browser ERROR   Error fetching data: {}
+[00:05:09.926] Server  LOG       Reload env: .env.local
+[00:05:10.125] Server  LOG     ✓ Compiled in 112ms
+[00:05:21.781] Browser LOG     Change background clicked
+[00:05:21.781] Browser ERROR   Error HTTP cambiando background: 404
+[00:05:39.652] Browser LOG     Change background clicked
+[00:05:39.652] Browser ERROR   Error HTTP cambiando background: 404
