@@ -85,7 +85,7 @@ h1, h2, h3, p {
 }
 
 .verse-card__actions {
-  gap: 12px;
+  gap: 5px;
   display: flex;
 }
 
