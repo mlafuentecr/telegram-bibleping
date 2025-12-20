@@ -1,236 +1,187 @@
-# 📖 BiblePing
+BiblePing
 
-BiblePing is an application that delivers **daily or random Bible verses**, paired with **inspirational background images**. The project supports two main entry points:
+BiblePing is an application that delivers daily or random Bible verses,
+paired with inspirational background images.
 
-* 🤖 **Telegram Bot**
-* 🌐 **Web Interface (Next.js)**
+The project has two main entry points:
+- Telegram Bot
+- Web Interface (Next.js)
 
-The goal is to provide a simple, visual, and accessible way to receive biblical inspiration.
+The goal is to provide a simple, visual, and accessible way to receive
+biblical inspiration.
 
----
+==================================================
 
-## ✨ Features
+FEATURES
 
-* Daily Bible verse (deterministic per day)
-* Random Bible verse
-* Inspirational background images
-* Telegram bot with simple commands
-* Modern web interface
-* Clean separation between **API**, **Bot**, and **Frontend**
+- Daily Bible verse (deterministic per day)
+- Random Bible verse
+- Inspirational background images
+- Share verse as an image
+- Telegram bot with simple commands
+- Modern web interface
+- Clean separation between Bot, API, and Frontend
 
----
+==================================================
 
-## 🧱 Tech Stack
+TECH STACK
 
-* **Backend API:** Node.js (native `http`)
-* **Telegram Bot:** Grammy (Telegram Bot API)
-* **Frontend:** Next.js
-* **Package Manager:** npm
+- Frontend: Next.js
+- Serverless API: Netlify Functions
+- Telegram Bot: Grammy (Telegram Bot API)
+- Runtime: Node.js
+- Package Manager: npm
 
----
+==================================================
 
-## 📦 Requirements
+REQUIREMENTS
 
-* Node.js **v16.0.0** or higher
-* npm **v7.0.0** or higher
+- Node.js v16 or higher
+- npm v7 or higher
 
----
+==================================================
 
-## 🗂 Project Structure (Important)
+PROJECT STRUCTURE
 
-```
-bibleping/
-├── backend/            # Node.js backend
-│   ├── src/
-│   │   ├── index.js    # HTTP API entry point (port 3001)
-│   │   ├── app.js      # Request handler
-│   │   ├── router.js   # API routes
-│   │   ├── bot.js      # Telegram bot (NO HTTP server)
-│   │   └── services/
-│   └── package.json
-│
-├── frontend/           # Next.js app (port 3000)
-│   └── package.json
-│
-└── README.md
-```
+telegram-bibleping/
 
-⚠️ **Important:**
+frontend/
+  - Next.js app (Netlify build)
 
-* `bot.js` runs the Telegram bot (no port)
-* `index.js` runs the HTTP API (port **3001**)
-* Next.js runs on port **3000**
+backend/
+  - Telegram bot and shared logic
+  - services/
+  - data/
+  - utils/
+  - bot.js (Telegram bot entry point, NO HTTP server)
 
----
+netlify/
+  - functions/
+    - verse-daily.js
+    - verse-random.js
+    - image-random.js
 
-## 🚀 Installation & Local Development
+netlify.toml
+README.txt
 
-### 1️⃣ Clone the repository
+==================================================
 
-```bash
-git clone https://github.com/tu-usuario/bibleping.git
-cd bibleping
-```
+LOCAL DEVELOPMENT
 
----
+Frontend (Web App)
 
-## 🔧 Backend (API)
+1) Go to frontend folder
+   cd frontend
 
-### Install dependencies
+2) Install dependencies
+   npm install
 
-```bash
+   
+
+Open in browser:
+http://localhost:3000
+
+==================================================
+
+TELEGRAM BOT (IMPORTANT)
+
+The Telegram bot ONLY works while this command is running:
+
+npm run bot
+
+If the process stops, the bot stops responding.
+
+Important notes:
+- Netlify CANNOT run Telegram bots
+- The bot must run on an always-on service
+  such as Railway, Render, or Fly.io
+
+==================================================
+
+CREATE THE TELEGRAM BOT
+
+1) Open Telegram
+2) Use @BotFather
+3) Copy your TELEGRAM_BOT_TOKEN
+
+==================================================
+
+ENVIRONMENT VARIABLES
+
+Create a .env file inside the backend folder:
+
+TELEGRAM_BOT_TOKEN=your_token_here
+
+==================================================
+
+RUN THE BOT (LOCAL OR PRODUCTION)
+
 cd backend
 npm install
-```
-
-### Start the API server
-
-```bash
-npm run start
-```
+npm run bot
 
 You should see:
+BiblePing Telegram bot is running...
 
-```
-BiblePing API running at http://localhost:3001
-```
+ cd frontend 
+ npm run dev
+ 
 
-### Test API endpoints
+==================================================
 
-```text
-http://localhost:3001/api/health
-http://localhost:3001/api/verse/daily
-http://localhost:3001/api/verse/random?language=es
-```
+TELEGRAM COMMANDS
 
----
+/start   -> Welcome message
+/verse   -> Get a Bible verse
+/app     -> Open the BiblePing web app
 
-## 🤖 Telegram Bot
+==================================================
 
-### 1️⃣ Create a Telegram bot
+PRODUCTION DEPLOYMENT (IMPORTANT)
 
-* Use **@BotFather** on Telegram
-* Copy your **TELEGRAM_BOT_TOKEN**
+Frontend + API:
+- Deployed on Netlify
+- The API is implemented using Netlify Functions (/api/*)
+- There is NO traditional backend HTTP server in production
 
-### 2️⃣ Configure environment variables
+Telegram Bot:
+- Runs as a standalone Node.js process
+- Deployed separately on Railway (recommended)
+- Uses shared logic from the backend folder
+- Start command:
+  npm run bot
 
-Create a `.env` file inside `backend/`:
+Important:
+- Do NOT run the bot locally and in production at the same time
+- The bot must be running 24/7 in production
 
-```env
-TELEGRAM_BOT_TOKEN=your_token_here
-```
+==================================================
 
-### 3️⃣ Run the bot (separate terminal)
+CONFIGURATION
 
-```bash
-cd backend
-npm run bot
-```
+Backend:
+- backend/src/data/verses.js  -> Bible verses dataset
+- backend/src/services/       -> Verse and image logic
 
-The bot will connect to Telegram and start listening for commands.
+Frontend:
+- frontend/src/app/page.tsx   -> UI and data fetching
 
----
+==================================================
 
-## 🌐 Frontend (Web App)
+ROADMAP
 
-### Install dependencies
+- Daily scheduled verse push
+- Multi-language support
+- Save favorite verses
+- Export verse images
+- More Telegram integrations
 
-```bash
-cd frontend
-npm install
-```
+==================================================
 
-### Start the frontend
-
-```bash
-npm run dev
-```
-
-The app will be available at:
-
-👉 **[http://localhost:3000](http://localhost:3000)**
-
-The frontend fetches data from the backend API running on **port 3001**.
-
----
-
-## 🤖 Telegram Bot Commands
-
-* `/start` → Welcome message
-* `/verse` → Get a Bible verse
-* `/app` → Open the BiblePing web app
-
----
-
-## 🌐 Web App Features
-
-* View today’s verse
-* Get a random verse
-* Change background image
-* Clean and minimal UI
-
----
-
-## ⚙️ Configuration
-
-### Backend
-
-* `backend/src/config.js`
-
-  * Environment variables
-  * Port configuration
-  * Default language
-
-* `backend/src/data/verses.js`
-
-  * Bible verses dataset
-
-### Frontend
-
-* `frontend/src/app/page.tsx`
-
-  * UI layout
-  * Data fetching logic
-
----
-
-## 🛣️ Roadmap
-
-* Scheduled daily verse push
-* Multi-language support
-* Save favorite verses
-* Export verse images
-* Integrations (WhatsApp, Email)
-
----
-
-## 📄 License
+LICENSE
 
 MIT License
 
-telegram-bibleping/
-│
-├─ frontend/                ← Next.js (Netlify build)
-│   ├─ package.json
-│   ├─ next.config.js
-│   └─ src/
-│
-├─ backend/                 ← lógica compartida (services, data)
-│   └─ src/
-│      ├─ services/
-│      ├─ data/
-│      └─ utils/
-│
-├─ netlify/
-│   └─ functions/           ← 👈 ACÁ VAN LAS FUNCTIONS
-│      ├─ verse-daily.js
-│      ├─ verse-random.js
-│      └─ image-random.js
-│
-├─ netlify.toml
-├─ package.json (opcional)
-└─ README.md
+==================================================
 
----
-
-🙏 *BiblePing — Daily inspiration in one message.*
+BiblePing — Daily inspiration in one message.
