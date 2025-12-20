@@ -170,11 +170,29 @@ Frontend:
 
 ROADMAP
 
-- Daily scheduled verse push
-- Multi-language support
-- Save favorite verses
-- Export verse images
-- More Telegram integrations
+┌───────────────┐
+│ Telegram User │
+└───────┬───────┘
+        │
+        ▼
+┌────────────────────┐
+│ Railway             │ THE BOT HAVE TO RUN (24/7) npm run dev or Railway ejecutar aplicaciones backend 24/7
+│ backend/src/bot.js  │  ← npm run bot (24/7)
+└────────┬───────────┘
+         │ fetch
+         ▼
+┌────────────────────┐
+│ Netlify Functions   │
+│ /api/verse/*       │
+│ /api/image         │
+└────────┬───────────┘
+         │
+         ▼
+┌────────────────────┐
+│ Netlify Next.js     │
+│ Frontend UI         │
+└────────────────────┘
+
 
 ==================================================
 
