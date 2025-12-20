@@ -73,3 +73,9 @@
 .btn--secondary:hover {
   background: rgba(15, 23, 42, 0.9);
 }
+
+/* Hide UI controls when sharing */
+.verse-card.is-sharing .verse-card__actions {
+  opacity: 0;
+  pointer-events: none;
+}

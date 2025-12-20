@@ -143,4 +143,9 @@ h1, h2, h3, p {
   background: #0f172ae6;
 }
 
+.verse-card.is-sharing .verse-card__actions {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /*# sourceMappingURL=src_app_globals_scss_c7f77e63.css.map*/

@@ -15,11 +15,18 @@ export default function ShareButton({
   cardRef,
 }: ShareButtonProps) {
   const handleShare = async () => {
-    const element = cardRef.current;
-    if (!element) return;
+    if (!cardRef.current) return;
+
+    const card = cardRef.current;
 
     try {
-      const dataUrl = await toPng(element, {
+      // 🔒 Hide buttons
+      card.classList.add('is-sharing');
+
+      // ⏱ wait one frame so DOM updates
+      await new Promise((r) => requestAnimationFrame(r));
+
+      const dataUrl = await toPng(card, {
         cacheBust: true,
         pixelRatio: 2,
       });
@@ -27,34 +34,28 @@ export default function ShareButton({
       const blob = await (await fetch(dataUrl)).blob();
       const file = new File([blob], 'verse.png', { type: 'image/png' });
 
-      // 📱 Mobile / modern browsers
       if (navigator.canShare?.({ files: [file] })) {
         await navigator.share({
           title: reference,
           text,
           files: [file],
         });
-        return;
+      } else {
+        const link = document.createElement('a');
+        link.href = dataUrl;
+        link.download = 'verse.png';
+        link.click();
       }
-
-      // 💻 Fallback: download
-      const link = document.createElement('a');
-      link.href = dataUrl;
-      link.download = 'verse.png';
-      link.click();
     } catch (err) {
-      console.error('Error sharing image:', err);
-      alert('Unable to share image');
+      console.error('Share failed', err);
+    } finally {
+      // 🔓 Restore UI
+      card.classList.remove('is-sharing');
     }
   };
 
   return (
-    <button
-      type="button"
-      className="btn btn--primary"
-      onClick={handleShare}
-      aria-label="Share verse as image"
-    >
+    <button className="btn btn--primary" onClick={handleShare}>
       Share
     </button>
   );
