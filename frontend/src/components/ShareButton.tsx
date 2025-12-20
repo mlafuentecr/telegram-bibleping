@@ -1,65 +1,61 @@
 'use client';
 
-import { useState } from 'react';
+import { toPng } from 'html-to-image';
+import { RefObject } from 'react';
 
 type ShareButtonProps = {
   reference: string;
   text: string;
-  imageUrl: string;
+  cardRef: RefObject<HTMLDivElement>;
 };
 
 export default function ShareButton({
   reference,
   text,
-  imageUrl,
+  cardRef,
 }: ShareButtonProps) {
-  const [copied, setCopied] = useState(false);
-
-  const shareText = `📖 ${reference}\n\n${text}\n\n🙏 via BiblePing`;
-
   const handleShare = async () => {
-    // 🔹 Try native share WITH image (Level 2)
-    if (navigator.canShare && navigator.canShare({ files: [] })) {
-      try {
-        const response = await fetch(imageUrl);
-        const blob = await response.blob();
+    const element = cardRef.current;
+    if (!element) return;
 
-        const file = new File([blob], 'bibleping-verse.png', {
-          type: blob.type,
-        });
+    try {
+      const dataUrl = await toPng(element, {
+        cacheBust: true,
+        pixelRatio: 2,
+      });
 
+      const blob = await (await fetch(dataUrl)).blob();
+      const file = new File([blob], 'verse.png', { type: 'image/png' });
+
+      // 📱 Mobile / modern browsers
+      if (navigator.canShare?.({ files: [file] })) {
         await navigator.share({
           title: reference,
-          text: shareText,
+          text,
           files: [file],
         });
-
         return;
-      } catch (err) {
-        console.warn('Image share failed, falling back:', err);
       }
-    }
 
-    // 🔹 Fallback: copy text + link
-    try {
-      await navigator.clipboard.writeText(
-        `${shareText}\n\n${window.location.href}`
-      );
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      // 💻 Fallback: download
+      const link = document.createElement('a');
+      link.href = dataUrl;
+      link.download = 'verse.png';
+      link.click();
     } catch (err) {
-      console.error('Clipboard fallback failed:', err);
+      console.error('Error sharing image:', err);
+      alert('Unable to share image');
     }
   };
 
   return (
     <button
       type="button"
-      onClick={handleShare}
       className="btn btn--primary"
-      aria-label="Share verse"
+      onClick={handleShare}
+      aria-label="Share verse as image"
     >
-      {copied ? 'Copied ✓' : 'Share'}
+      Share
     </button>
   );
 }

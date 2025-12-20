@@ -1,6 +1,5 @@
 {
   "/api/image/route": "app/api/image/route.js",
   "/api/verse/daily/route": "app/api/verse/daily/route.js",
-  "/api/verse/random/route": "app/api/verse/random/route.js",
   "/page": "app/page.js"
 }

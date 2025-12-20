@@ -7,7 +7,7 @@ type BackgroundSwitcherProps = {
 
 export default function BackgroundSwitcher({ onClick }: BackgroundSwitcherProps) {
   return (
-    <button className="btn btn--secondary" type="button" onClick={onClick}>
+    <button className="btn btn--primary" type="button" onClick={onClick}>
       Change background
     </button>
   );
